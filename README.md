@@ -1,7 +1,8 @@
 # lseg_ui_chatbot
 
-Pre-Interview Coding Challenge
-Challenge 3: UI - Chatbot
+# Pre-Interview Coding Challenge
+
+# Challenge 3: UI - Chatbot
 
 # Objective
 
@@ -10,12 +11,12 @@ User can then select any one of those stocks to view the latest stock price.
 
 # Requirements
 
-• Create a chatbot using any preferred language/platform
-• Home Menu must consist of 3 Stock exchanges (LSEG, NASDAQ, NYSE)
-• Stock Menu - Upon selecting any of them, provide 5 stock names (different for each exchange)
-• Upon selection of any stock name, display its current value, and again provide Stock Menu (options to
-select 5 stocks)
-• Provide options to go to Home Menu at any point in time.
+- Create a chatbot using any preferred language/platform
+- Home Menu must consist of 3 Stock exchanges (LSEG, NASDAQ, NYSE)
+- Stock Menu - Upon selecting any of them, provide 5 stock names (different for each exchange)
+- Upon selection of any stock name, display its current value, and again provide Stock Menu (options to
+  select 5 stocks)
+- Provide options to go to Home Menu at any point in time.
 
 # Data & Inputs
 
@@ -38,7 +39,9 @@ Include a README file explaining how to set up and run your application.
 # Optional Enhancements
 
 Feel free to add enhancements that could improve the extensibility/maintainability for future
-enhancement, user experience etc., Some suggestions include:
-• additional functionality or checks
-• value added user experience features
-• optimizations for performance and scalability
+enhancement, user experience etc.,
+Some suggestions include:
+
+- additional functionality or checks
+- value added user experience features
+- optimizations for performance and scalability
