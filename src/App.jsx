@@ -1,35 +1,115 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import Navbar from './Navbar';
+import Chatbot from './Chatbot';
+import stockData from './stockData.json';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [selectedExchange, setSelectedExchange] = useState('');
+  const [selectedStockMenu, setSelectedStockMenu] = useState('');
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <Navbar />
+      <div className='mainContent'>
+        <h1 className='introMessage'>
+          Hello! Welcome to LSEG. I &apos; m here to help you.
+        </h1>
+        <div className='homeMenu'>
+          <Chatbot />
+          <div className='menu'>
+            <h1>Please select a Stock Exchange.</h1>
 
-export default App
+            <ul>
+              {stockData.map((exchange) => (
+                <li
+                  key={exchange.code}
+                  onClick={() => {
+                    setSelectedExchange(exchange);
+                    setSelectedStockMenu('');
+                  }}
+                >
+                  {exchange.stockExchange}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        {selectedExchange.stockExchange && (
+          <div className='selectedExchange'>
+            {selectedExchange.stockExchange}
+          </div>
+        )}
+
+        {selectedExchange.topStocks && (
+          <>
+            <div className='homeMenu'>
+              <Chatbot />
+              <div className='menu'>
+                <h1>Please select a stock.</h1>
+                <ul>
+                  {selectedExchange.topStocks.map((stock) => (
+                    <li
+                      key={stock.code}
+                      onClick={() => setSelectedStockMenu(stock)}
+                    >
+                      {stock.stockName} ({stock.code})
+                    </li>
+                  ))}
+                  <li
+                    onClick={() => {
+                      setSelectedExchange('');
+                      setSelectedStockMenu('');
+                    }}
+                    className='actionButton'
+                  >
+                    Main Menu
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {selectedStockMenu.stockName && (
+              <div className='selectedStockMenu'>
+                {selectedStockMenu.stockName} {selectedStockMenu.code}
+              </div>
+            )}
+          </>
+        )}
+
+        {selectedStockMenu.stockName && (
+          <>
+            <div className='homeMenu'>
+              <Chatbot />
+              <div className='menu'>
+                <h1>
+                  Stock Price of {selectedStockMenu.stockName} (
+                  {selectedStockMenu.code}) is ${selectedStockMenu.price}.
+                  Please select an option.
+                </h1>
+                <ul>
+                  <li
+                    onClick={() => {
+                      setSelectedExchange('');
+                      setSelectedStockMenu('');
+                    }}
+                    className='actionButton'
+                  >
+                    Main Menu
+                  </li>
+                  <li
+                    onClick={() => setSelectedStockMenu('')}
+                    className='actionButton'
+                  >
+                    Go Back
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </>
+  );
+};
+
+export default App;
